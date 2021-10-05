@@ -32,7 +32,7 @@ public class KStreamsApplication {
         final KStream<String, String> input_records = builder.stream(INPUT_TOPIC_NAME, Consumed.with(Serdes.String(), Serdes.String()));
 
         input_records.mapValues(x -> {
-            
+
             return x;
         });
 
