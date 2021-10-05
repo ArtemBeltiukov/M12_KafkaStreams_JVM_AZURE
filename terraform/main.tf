@@ -1,5 +1,9 @@
 terraform {
   backend "azurerm" {
+	resource_group_name = "main-rg"
+    storage_account_name = "accmodule201"
+    container_name = "container"
+    key = "WbzkyiHarbai2B1SfvsdIPrb/72N+F2yJnVIcidcimXIpgzVS3tNDgbErYnnJJIeTWMVXljNilvN/U2KaqZ2kA=="
 
   }
 }
@@ -17,7 +21,7 @@ resource "azurerm_resource_group" "bdcc" {
   location = var.LOCATION
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 
   tags = {
@@ -43,7 +47,7 @@ resource "azurerm_storage_account" "bdcc" {
   }
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 
   tags = {
@@ -60,7 +64,7 @@ resource "azurerm_storage_data_lake_gen2_filesystem" "gen2_data" {
   storage_account_id = azurerm_storage_account.bdcc.id
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 }
 
