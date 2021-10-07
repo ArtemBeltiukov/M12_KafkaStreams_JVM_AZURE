@@ -110,3 +110,7 @@ For running the azure connector, you can create your own docker image. Create yo
   ```cmd
   $ kubectl create -f kstream-app.yaml
   ```
+- You will see the result(expedia-ext topic)
+![img.png](screenshots/img.png)
+- Then you can query the result
+![img_1.png](screenshots/img_1.png)

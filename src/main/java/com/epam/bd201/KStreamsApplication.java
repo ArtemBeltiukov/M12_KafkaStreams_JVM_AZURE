@@ -7,7 +7,10 @@ import org.apache.kafka.streams.StreamsConfig;
 import org.apache.kafka.streams.Topology;
 import org.apache.kafka.streams.kstream.Consumed;
 import org.apache.kafka.streams.kstream.KStream;
+import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
 
@@ -31,12 +34,32 @@ public class KStreamsApplication {
 
         final KStream<String, String> input_records = builder.stream(INPUT_TOPIC_NAME, Consumed.with(Serdes.String(), Serdes.String()));
 
-        input_records.mapValues(x -> {
 
-            return x;
-        });
+        input_records.mapValues(value -> {
+            JSONObject json = new JSONObject(value);
 
-        input_records.to(OUTPUT_TOPIC_NAME);
+            try {
+                Date ci = new SimpleDateFormat("yyyy-MM-dd").parse(json.getString("srch_ci"));
+                Date co = new SimpleDateFormat("yyyy-MM-dd").parse(json.getString("srch_co"));
+                long duration = (co.getTime() - ci.getTime()) / 1000 / 60 / 60 / 24;
+
+                String cat = "Erroneous data";
+
+                if (duration > 0 && duration <= 4)
+                    cat = "Short stay";
+                if (duration > 4 && duration <= 10)
+                    cat = "Standard stay";
+                if (duration > 10 && duration <= 14)
+                    cat = "Standard extended stay";
+                if (duration > 14)
+                    cat = "Long stay";
+
+                json.put("stay_cat", cat);
+            } catch (Exception e) {
+                json.put("stay_cat", "Erroneous data");
+            }
+            return json.toString();
+        }).to(OUTPUT_TOPIC_NAME);
 
         final Topology topology = builder.build();
         System.out.println(topology.describe());

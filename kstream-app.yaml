@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: kstream-app
-          image: fuskero/kstream-app:1.0.7
+          image: fuskero/kstream-app:1.0.3

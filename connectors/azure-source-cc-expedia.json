@@ -9,12 +9,6 @@
     "azblob.retry.retries": "3",
     "format.class": "io.confluent.connect.azure.blob.storage.format.avro.AvroFormat",
     "confluent.topic.bootstrap.servers": "http://kafka.confluent.svc.cluster.local:9092",
-    "confluent.topic.replication.factor": "3",
-    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
-    "key.converter.schema.registry.url": "http://schemaregistry.confluent.svc.cluster.local:8081",
-    "key.converter.enhanced.avro.schema.support": true,
-    "value.converter": "io.confluent.connect.avro.AvroConverter",
-    "value.converter.schema.registry.url": "http://schemaregistry.confluent.svc.cluster.local:8081",
-    "value.converter.enhanced.avro.schema.support": true
+    "confluent.topic.replication.factor": "1"
   }
 }
