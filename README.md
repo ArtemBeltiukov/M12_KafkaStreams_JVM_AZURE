@@ -105,7 +105,7 @@ For running the azure connector, you can create your own docker image. Create yo
   $ docker push image-registry/your-project-id/kstream-app:1.0
   ```
 
-- Run you KStream app container in the K8s kluster alongside with Kafka Connect. Don't forger to update [Kubernetes deployment](kstream-app.yaml)
+- Run you KStream app container in the K8s cluster alongside with Kafka Connect. Don't forger to update [Kubernetes deployment](kstream-app.yaml)
   with valid registry for your image
   ```cmd
   $ kubectl create -f kstream-app.yaml
@@ -114,3 +114,5 @@ For running the azure connector, you can create your own docker image. Create yo
 ![img.png](screenshots/img.png)
 - Then you can query the result
 ![img_1.png](screenshots/img_1.png)
+- Query data to see number of hotels for each category
+![img_1.png](screenshots/img_2.png)
